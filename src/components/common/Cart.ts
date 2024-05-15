@@ -149,6 +149,10 @@ export class StoreItemCart extends Component<IPillCart> {
     this._index.textContent = value.toString();
   }
 
+  set price(value: number) { 
+    this._price.textContent = formatPrice(value) + ' синапсов'; 
+  }
+
 }
 
 
