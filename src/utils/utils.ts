@@ -133,3 +133,16 @@ export function createElement<
     }
     return element;
 }
+//отображение цен
+
+export function formatPrice(price: number) {
+    const stringOfPrice = price.toString();return stringOfPrice.length < 5
+    ? stringOfPrice
+    : stringOfPrice
+      .split('')
+      .reverse()
+      .map((s, i) => ((i + 1) % 3 === 0 ? ' ' + s : s))
+      .reverse()
+      .join('');
+}
+
