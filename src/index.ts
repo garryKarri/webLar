@@ -107,7 +107,10 @@ events.on('card:toBasket', (item: IPill) => {
 // Открытие корзины
 events.on('basket:open', () => {
   page.locked = true;
+  console.log("appData", appData);
+
   const cartItems = appData.cart.map((item, index) => {
+
     const storeItem = new StoreItemCart(
       'card',
       cloneTemplate(cardBasketTemplate),
@@ -115,21 +118,30 @@ events.on('basket:open', () => {
         onClick: () => events.emit('basket:delete', item),
       }
     );
+   console.log("storeItem", storeItem);
+   
+
     return storeItem.render({
       title: item.title,
       price: item.price,
       index: index + 1,
-      // total: item.price,
     });
   });
-  console.log(cartItems);
+  
   cart.list = cartItems;
-  modal.render({
-    content: cart.render({
-      // list: cartItems,
-      // total: appData.getTotalCartPrice(),
-    }),
-  });
+   // Получаем сумму всех товаров в корзине
+   const totalCartPrice = appData.getTotalCartPrice();
+   modal.render({
+     content: cart.render({
+       total: totalCartPrice, // Передаем сумму в шаблон корзины
+     }),
+   });
+  // modal.render({
+  //   content: cart.render({
+  //     // list: cartItems,
+  //     // total: appData.getTotalCartPrice(),
+  //   }),
+  // });
 });
 
 // // Удалить товар из корзины

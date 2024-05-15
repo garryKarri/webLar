@@ -7,9 +7,7 @@ import {
 } from '../../utils/utils';
 import { IEvents } from '../base/events';
 import { IPill } from '../../types';
-import { Pill } from '../AppData';
-
-
+// import { Pill } from '../AppData';
 
 interface ICart {
   // Массив элементов списка
@@ -19,7 +17,6 @@ interface ICart {
   // items: HTMLElement[];
   // selected: string[];
 }
-
 
 // interface ICartView {
 //   //массив элементов DOM, представляющих товары в корзине
@@ -32,8 +29,7 @@ interface ICart {
 export class Cart extends Component<ICart> {
   // Ссылки на внутренние элементы
   protected _list: HTMLElement;
-  protected _price: HTMLElement;
-  // _synapse: HTMLElement;
+  protected _price: HTMLElement; // _synapse: HTMLElement;
   protected _button: HTMLButtonElement;
   total: number;
 
@@ -45,9 +41,9 @@ export class Cart extends Component<ICart> {
     super(container);
     this._button = container.querySelector(`.${blockName}__button`);
     this._price = container.querySelector(`.${blockName}__price`);
-    this._list = container.querySelector(`.${blockName}__list`) //basket__list
+    this._list = container.querySelector(`.${blockName}__list`); //basket__list
     if (!this._list) {
-      console.error("Ошибка: Элемент списка не найден в DOM.");
+      console.error('Ошибка: Элемент списка не найден в DOM.');
       return;
     }
     if (this._button) {
@@ -67,11 +63,11 @@ export class Cart extends Component<ICart> {
   //       })
   //     );
   //   }
-//   // }
-//   set selected(items: string[]) {
-//     // Если в корзине нет товаров (длина массива items равна 0), то блокируем кнопку
-//     this.setDisabled(this._button, items.length === 0);
-// }
+  //   // }
+  //   set selected(items: string[]) {
+  //     // Если в корзине нет товаров (длина массива items равна 0), то блокируем кнопку
+  //     this.setDisabled(this._button, items.length === 0);
+  // }
   set selected(items: string[]) {
     if (items.length) {
       this.setDisabled(this._button, false);
@@ -83,10 +79,8 @@ export class Cart extends Component<ICart> {
   // set для списка товаров
 
   set list(items: HTMLElement[]) {
-    
     this._list.replaceChildren(...items);
     this._button.disabled = items.length === 0;
-   
   }
 
   // Метод отключающий кнопку "Оформить"
@@ -108,7 +102,7 @@ export class Cart extends Component<ICart> {
 export interface IPillCart extends IPill {
   id: string;
   index: number;
-  total: number
+  total: number;
 }
 
 export interface IStoreItemCartActions {
@@ -119,6 +113,7 @@ export class StoreItemCart extends Component<IPillCart> {
   protected _index: HTMLElement;
   protected _title: HTMLElement;
   protected _price: HTMLElement;
+  protected _total: HTMLElement; // сумма всех товаров в корзине
   protected _button: HTMLButtonElement;
 
   constructor(
@@ -132,7 +127,6 @@ export class StoreItemCart extends Component<IPillCart> {
     this._index = container.querySelector(`.basket__item-index`);
     this._price = container.querySelector(`.${blockName}__price`);
     this._button = container.querySelector(`.${blockName}__button`);
-
     if (this._button) {
       this._button.addEventListener('click', (evt) => {
         this.container.remove();
@@ -149,11 +143,7 @@ export class StoreItemCart extends Component<IPillCart> {
     this._index.textContent = value.toString();
   }
 
-  set price(value: number) { 
-    this._price.textContent = formatPrice(value) + ' синапсов'; 
+  set price(value: number) {
+    this._price.textContent = formatPrice(value) + ' синапсов';
   }
-
 }
-
-
-
