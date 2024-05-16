@@ -107,10 +107,9 @@ events.on('card:toBasket', (item: IPill) => {
 // Открытие корзины
 events.on('basket:open', () => {
   page.locked = true;
-  console.log("appData", appData);
+  console.log('appData', appData);
 
   const cartItems = appData.cart.map((item, index) => {
-
     const storeItem = new StoreItemCart(
       'card',
       cloneTemplate(cardBasketTemplate),
@@ -118,8 +117,7 @@ events.on('basket:open', () => {
         onClick: () => events.emit('basket:delete', item),
       }
     );
-   console.log("storeItem", storeItem);
-   
+    console.log('storeItem', storeItem);
 
     return storeItem.render({
       title: item.title,
@@ -127,15 +125,18 @@ events.on('basket:open', () => {
       index: index + 1,
     });
   });
-  
+
   cart.list = cartItems;
-   // Получаем сумму всех товаров в корзине
-   const totalCartPrice = appData.getTotalCartPrice();
-   modal.render({
-     content: cart.render({
-       total: totalCartPrice, // Передаем сумму в шаблон корзины
-     }),
-   });
+  // Получаем сумму всех товаров в корзине
+  const totalCartPrice = appData.getTotalCartPrice();
+  console.log(totalCartPrice);
+
+  cart.price = totalCartPrice;
+  modal.render({
+    content: cart.render({
+      // total: totalCartPrice, // Передаем сумму в шаблон корзины
+    }),
+  });
   // modal.render({
   //   content: cart.render({
   //     // list: cartItems,
@@ -148,7 +149,7 @@ events.on('basket:open', () => {
 events.on('basket:delete', (item: IPill) => {
   appData.removeItemFromCart(item.id);
   item.selected = false;
-  cart.total = appData.getTotalCartPrice();
+  // cart.total = appData.getTotalCartPrice();
   page.counter = appData.getCartAmount();
   cart.refreshIndices();
   if (!appData.cart.length) {

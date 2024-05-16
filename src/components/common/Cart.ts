@@ -31,7 +31,6 @@ export class Cart extends Component<ICart> {
   protected _list: HTMLElement;
   protected _price: HTMLElement; // _synapse: HTMLElement;
   protected _button: HTMLButtonElement;
-  total: number;
 
   constructor(
     protected blockName: string,
@@ -81,6 +80,11 @@ export class Cart extends Component<ICart> {
   set list(items: HTMLElement[]) {
     this._list.replaceChildren(...items);
     this._button.disabled = items.length === 0;
+  }
+
+  set price(value: number) {
+    this._price.textContent = formatPrice(value) + ' синапсов';
+    console.log(value, this._price);
   }
 
   // Метод отключающий кнопку "Оформить"
@@ -145,5 +149,6 @@ export class StoreItemCart extends Component<IPillCart> {
 
   set price(value: number) {
     this._price.textContent = formatPrice(value) + ' синапсов';
+    console.log(value, this._price);
   }
 }
