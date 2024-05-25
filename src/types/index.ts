@@ -5,9 +5,13 @@ export type CategoryTitle =
   | 'дополнительное'
   | 'кнопка';
 
-export type Category = {
-  title: CategoryTitle;
-  color: 'green' | 'orange' | 'blue' | 'yellow' | 'purple';
+// export type Category = {
+//   title: CategoryTitle;
+//   color: 'green' | 'orange' | 'blue' | 'yellow' | 'purple';
+// };
+
+export type categoryChoicing = {
+  [Key in CategoryTitle]: string;
 };
 
 //описание самого товара, Card - оболочка
@@ -18,7 +22,7 @@ export interface IPill {
   title: string;
   description: string;
   price: number | null;
-  category: Category;
+  category: CategoryTitle;
   image: string;
   // был данный товар добавлен в корзину или нет
   selected: boolean;

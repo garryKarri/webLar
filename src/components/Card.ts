@@ -1,5 +1,5 @@
 import { Component } from './base/Component';
-import { Category, CategoryTitle } from '../types';
+import {  CategoryTitle, categoryChoicing } from '../types';
 import { ensureElement, formatPrice } from '../utils/utils';
 import { CDN_URL } from '../utils/constants';
 
@@ -9,7 +9,7 @@ export interface ICard {
   title: string;
   description: string;
   price: number | null;
-  category: Category;
+  category: CategoryTitle;
   image: string;
   selected: boolean;
 }
@@ -102,9 +102,20 @@ export class Card extends Component<ICard> {
   // Сеттер для категории
   set category(value: CategoryTitle) {
     this._category.textContent = value;
+    this._category.classList.add(categoryChoice[value]);
+
   }
 }
 
+export const categoryChoice: categoryChoicing = { 
+ 
+  'софт-скил':'card__category_soft', 
+  'хард-скил': 'card__category_additional', 
+  'другое': 'card__category_other', 
+  'дополнительное':'card__category_additional', 
+  'кнопка': 'card__category_button', 
+  
+};
 export class StoreItem extends Card {
   constructor(container: HTMLElement, actions?: ICardActions) {
     super('card', container, actions);
