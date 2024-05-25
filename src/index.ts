@@ -144,7 +144,7 @@ events.on('basket:open', () => {
 events.on('basket:delete', (item: IPill) => {
   appData.removeItemFromCart(item.id);
   item.selected = false;
-  // cart.total = appData.getTotalCartPrice();
+  cart.total = appData.getTotalCartPrice();
   page.counter = appData.getCartAmount();
   cart.refreshIndices();
   if (!appData.cart.length) {
