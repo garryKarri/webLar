@@ -48,7 +48,7 @@ type PaymentType = 'cash' | 'card';
 
 interface IOrder {
   items: string[];
-  typeOfPay: PaymentType;
+  payment: PaymentType;
   total: number | null;
   address: string;
   email: string;
@@ -56,7 +56,7 @@ interface IOrder {
 }
 
 export type IOrderForm = {
-  typeOfPay?: boolean;
+  payment?: boolean;
   address?: string;
   email?: string;
   phone?: string;
@@ -89,6 +89,7 @@ export interface IAppState {
 export type ApiAnswer = {
   items: IPill[];
 };
-export type ApiPostAnswer = { // @ добавил
-  order: IOrder
+export type ApiPostAnswer = {
+  // @ добавил
+  order: IOrder;
 };

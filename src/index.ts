@@ -27,7 +27,7 @@ const contactsTemplate = ensureElement<HTMLTemplateElement>('#contacts');
 
 const orderData: IOrder = {
   address: '',
-  typeOfPay: '',
+  payment: '',
   items: [],
   total: null,
   email: '',
@@ -166,10 +166,10 @@ events.on('basket:order', () => {
 });
 
 events.on(
-  'order.typeOfPay:change',
+  'order.payment:change',
   (data: { field: string; value: string }) => {
     // console.log(data);
-    appData.order.typeOfPay = data.value;
+    appData.order.payment = data.value;
     // order.valid = false;
   }
 );
@@ -189,7 +189,7 @@ events.on('order.phone:change', (data: { field: string; value: string }) => {
 // отправка формы на бэк
 events.on('order:submit', (order: IOrder) => {
   appData.order.total = appData.getTotalCartPrice();
-  appData.order.typeOfPay = order.typeOfPay;
+  appData.order.payment = order.payment;
   appData.order.address = order.address;
   appData.setItems();
   modal.render({

@@ -66,7 +66,7 @@ class GlobalState extends Model<IGlobalState> {
   // Заказ
    order: IOrder = {
     items?: [],
-    typeOfPay?: '',
+    payment?: '',
     address?: '';
     email?: '';
     phone?: '';

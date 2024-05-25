@@ -23,7 +23,7 @@ export class AppState extends Model<IAppState> {
   //заказ
   order: IOrder = {
     items: [],
-    typeOfPay: '',
+    payment: '',
     total: null,
     address: '',
     email: '',
@@ -49,7 +49,7 @@ export class AppState extends Model<IAppState> {
       items: [],
       phone: '',
       // step: 1,
-      typeOfPay: '',
+      payment: '',
       total: null,
     };
   }
