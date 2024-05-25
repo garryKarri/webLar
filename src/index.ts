@@ -7,7 +7,7 @@ import { Page } from './components/Page';
 import { cloneTemplate, ensureElement } from './utils/utils';
 import { Modal } from './components/common/Modal';
 import { Cart, StoreItemCart } from './components/common/Cart';
-import { ApiAnswer, IPill } from './types';
+import { ApiAnswer, ApiPostAnswer, IPill } from './types';
 import { Order, Contacts, IOrder } from './components/Order';
 import { Success } from './components/common/Success';
 import { Api } from './components/base/api';
@@ -32,7 +32,7 @@ const orderData: IOrder = {
   total: null,
   email: '',
   phone: '',
-  step: 1,
+  // step: 1,
 };
 
 // Модель данных приложения
@@ -186,8 +186,7 @@ events.on('order.phone:change', (data: { field: string; value: string }) => {
   appData.order.phone = data.value;
 });
 
-// // Окно успешной покупки
-
+// отправка формы на бэк
 events.on('order:submit', (order: IOrder) => {
   appData.order.total = appData.getTotalCartPrice();
   appData.order.typeOfPay = order.typeOfPay;
@@ -199,14 +198,18 @@ events.on('order:submit', (order: IOrder) => {
       errors: [],
     }),
   });
-
   contacts.checkButton();
+  console.log(appData.order);
+  
+  
 });
 
+// Окно успешной покупки
 events.on('order:success', (order: IOrder) => {
   appData.order.total = appData.getTotalCartPrice();
   appData.order.phone = order.phone;
   appData.order.email = order.email;
+
   appData.setItems();
   appData.clearCart(); // очистка корзины
   appData.setAllItemsButtonEvalableForOder(); // доступность кнопки оформления заказа
@@ -215,6 +218,16 @@ events.on('order:success', (order: IOrder) => {
       total: appData.order.total,
     }),
   });
+  // отправка данных на бэк  @Добавил
+  WebLarekAPI.post('/order', appData.order)
+    .then((response: ApiPostAnswer) => {
+      console.log(response);
+
+      // appData.setStore(response.items as IPill[]);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
 });
 
 // // Закрытие модального окна

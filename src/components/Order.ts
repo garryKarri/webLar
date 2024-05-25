@@ -12,7 +12,7 @@ export interface IOrder {
   total?: null | number;
   email?: string;
   phone?: string;
-  step?: number;
+  // step?: number;
 }
 
 /*

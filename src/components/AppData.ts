@@ -28,7 +28,7 @@ export class AppState extends Model<IAppState> {
     address: '',
     email: '',
     phone: '',
-    step: 1,
+    // step: 1,
   };
 
   addItemToCart(value: IPill) {
@@ -48,7 +48,7 @@ export class AppState extends Model<IAppState> {
       email: '',
       items: [],
       phone: '',
-      step: 1,
+      // step: 1,
       typeOfPay: '',
       total: null,
     };
