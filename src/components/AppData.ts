@@ -42,6 +42,17 @@ export class AppState extends Model<IAppState> {
   clearCart() {
     this.cart.length = 0;
   }
+  clearOder() {
+    this.order = {
+      address: '',
+      email: '',
+      items: [],
+      phone: '',
+      step: 1,
+      typeOfPay: '',
+      total: null,
+    };
+  }
 
   getCartItems() {
     return this.cart.length;
@@ -56,6 +67,16 @@ export class AppState extends Model<IAppState> {
   }
   setItems() {
     this.order.items = this.cart.map((item) => item.id);
+  }
+
+  setAllItemsButtonEvalableForOder() {
+    // this.store = this.store.map((item) => ({
+    //   ...item,
+    //   selected: false,
+    // }));
+    for(const item of this.store) {
+      item.selected = false;
+    }
   }
 
   setStore(items: IPill[]) {

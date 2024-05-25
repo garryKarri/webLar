@@ -110,8 +110,6 @@ events.on('card:toBasket', (item: IPill) => {
 // Открытие корзины
 events.on('basket:open', () => {
   page.locked = true;
-  console.log('appData', appData);
-
   const cartItems = appData.cart.map((item, index) => {
     const storeItem = new StoreItemCart(
       'card',
@@ -120,7 +118,6 @@ events.on('basket:open', () => {
         onClick: () => events.emit('basket:delete', item),
       }
     );
-    console.log('storeItem', storeItem);
 
     return storeItem.render({
       title: item.title,
@@ -204,6 +201,8 @@ events.on('order:success', (order: IOrder) => {
   appData.order.phone = order.phone;
   appData.order.email = order.email;
   appData.setItems();
+  appData.clearCart(); // очистка корзины
+  appData.setAllItemsButtonEvalableForOder(); // доступность кнопки оформления заказа
   modal.render({
     content: success.render({
       total: appData.order.total,
@@ -214,4 +213,6 @@ events.on('order:success', (order: IOrder) => {
 // // Закрытие модального окна
 events.on('modal:close', () => {
   page.locked = false;
+  appData.clearOder(); // очистка заказа
+  page.counter = appData.getCartAmount(); // обновление количества позиций в корзине
 });

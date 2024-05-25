@@ -74,7 +74,6 @@ export class Order extends Form<IOrder> {
     }
   }
   checkButtonState() {
-    console.log(this.order);
     const isFormValid = !!this.order.typeOfPay && !!this.order.address;
     if (isFormValid) {
       this._button.removeAttribute('disabled');

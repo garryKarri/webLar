@@ -79,7 +79,7 @@ export class Card extends Component<ICard> {
     element.src = CDN_URL + imagePath;
   }
 
-  // set для определения выбрали товар или нет
+  // set для определения выбрали данный товар или нет
   set selected(value: boolean) {
     if (!this._button.disabled) {
       this._button.disabled = value;
