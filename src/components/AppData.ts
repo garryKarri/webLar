@@ -28,7 +28,6 @@ export class AppState extends Model<IAppState> {
     address: '',
     email: '',
     phone: '',
-    // step: 1,
   };
 
   addItemToCart(value: IPill) {
@@ -48,7 +47,6 @@ export class AppState extends Model<IAppState> {
       email: '',
       items: [],
       phone: '',
-      // step: 1,
       payment: '',
       total: null,
     };
@@ -70,10 +68,6 @@ export class AppState extends Model<IAppState> {
   }
 
   setAllItemsButtonEvalableForOder() {
-    // this.store = this.store.map((item) => ({
-    //   ...item,
-    //   selected: false,
-    // }));
     for(const item of this.store) {
       item.selected = false;
     }

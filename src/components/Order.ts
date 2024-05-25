@@ -6,13 +6,11 @@ import { Form } from './common/Form';
  * */
 export interface IOrder {
   address?: string;
-  // Способ оплаты
   payment?: string;
   items?: string[];
   total?: null | number;
   email?: string;
   phone?: string;
-  // step?: number;
 }
 
 /*
@@ -114,7 +112,7 @@ export class Contacts extends Form<IContacts> {
     this._phone.addEventListener('input', (e: Event) => {
       const target = e.target as HTMLInputElement;
       // this.order.phone = 'phone';
-      this.order.phone = target.value; // @ изменил
+      this.order.phone = target.value; 
 
       this.onInputChange('phone', target.value);
 
@@ -125,7 +123,7 @@ export class Contacts extends Form<IContacts> {
       const target = e.target as HTMLInputElement;
 
       // this.order.email = 'email';
-      this.order.email = target.value; // @ изменил
+      this.order.email = target.value; 
       this.onInputChange('email', target.value);
 
       this.checkButton();

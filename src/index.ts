@@ -32,7 +32,6 @@ const orderData: IOrder = {
   total: null,
   email: '',
   phone: '',
-  // step: 1,
 };
 
 // Модель данных приложения
@@ -168,9 +167,7 @@ events.on('basket:order', () => {
 events.on(
   'order.payment:change',
   (data: { field: string; value: string }) => {
-    // console.log(data);
     appData.order.payment = data.value;
-    // order.valid = false;
   }
 );
 
@@ -186,7 +183,7 @@ events.on('order.phone:change', (data: { field: string; value: string }) => {
   appData.order.phone = data.value;
 });
 
-// отправка формы на бэк
+
 events.on('order:submit', (order: IOrder) => {
   appData.order.total = appData.getTotalCartPrice();
   appData.order.payment = order.payment;
@@ -204,7 +201,7 @@ events.on('order:submit', (order: IOrder) => {
   
 });
 
-// Окно успешной покупки
+// отправка формы на бэк и открытие окна успешной покупки
 events.on('order:success', (order: IOrder) => {
   appData.order.total = appData.getTotalCartPrice();
   appData.order.phone = order.phone;
@@ -213,22 +210,25 @@ events.on('order:success', (order: IOrder) => {
   appData.setItems();
   appData.clearCart(); // очистка корзины
   appData.setAllItemsButtonEvalableForOder(); // доступность кнопки оформления заказа
-  modal.render({
-    content: success.render({
-      total: appData.order.total,
-    }),
-  });
+
   // отправка данных на бэк  @Добавил
   WebLarekAPI.post('/order', appData.order)
     .then((response: ApiPostAnswer) => {
       console.log(response);
-
       // appData.setStore(response.items as IPill[]);
     })
     .catch((err) => {
       console.error(err);
     });
 });
+
+
+  modal.render({
+    content: success.render({
+      total: appData.order.total,
+    }),
+  });
+  
 
 // // Закрытие модального окна
 events.on('modal:close', () => {
