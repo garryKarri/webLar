@@ -149,15 +149,20 @@ events.on('basket:delete', (item: IPill) => {
   }
 });
 
-// // Оформить заказ
+///////////////////////////////////////////
+//  ОФОРМЛЕНИЕ ЗАКАЗА //
 events.on('basket:order', () => {
+  // console.log('order', order);
+
   modal.render({
     content: order.render({
-      address: '',
+      address: appData.order.address || '',
       valid: false,
       errors: [],
     }),
   });
+
+  order.checkButtonState();
 });
 
 events.on(
@@ -194,6 +199,8 @@ events.on('order:submit', (order: IOrder) => {
       errors: [],
     }),
   });
+
+  contacts.checkButton();
 });
 
 events.on('order:success', (order: IOrder) => {

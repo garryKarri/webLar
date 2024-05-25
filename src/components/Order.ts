@@ -74,7 +74,7 @@ export class Order extends Form<IOrder> {
     }
   }
   checkButtonState() {
-    const isFormValid = !!this.order.typeOfPay && !!this.order.address;
+    const isFormValid =!!this.order.typeOfPay && !!this.order.address
     if (isFormValid) {
       this._button.removeAttribute('disabled');
     } else {
@@ -113,7 +113,8 @@ export class Contacts extends Form<IContacts> {
 
     this._phone.addEventListener('input', (e: Event) => {
       const target = e.target as HTMLInputElement;
-      this.order.phone = 'phone';
+      // this.order.phone = 'phone';
+      this.order.phone = target.value; // @ изменил
 
       this.onInputChange('phone', target.value);
 
@@ -123,7 +124,8 @@ export class Contacts extends Form<IContacts> {
     this._email.addEventListener('input', (e: Event) => {
       const target = e.target as HTMLInputElement;
 
-      this.order.email = 'email';
+      // this.order.email = 'email';
+      this.order.email = target.value; // @ изменил
       this.onInputChange('email', target.value);
 
       this.checkButton();
