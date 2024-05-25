@@ -16,11 +16,7 @@ export abstract class Component<T> {
         }
     }
 
-    // Сменить статус блокировки
-    // setDisabled(element: HTMLElement, state: boolean): void {
-    //   if (state) element.setAttribute('disabled', 'disabled');
-    //   else element.removeAttribute('disabled');
-    // }
+   // Установить состояние элемента доступности кнопки
    setDisabled(element: HTMLElement, state: boolean): void {
     if (state) element.setAttribute('disabled', 'disabled');
     else element.removeAttribute('disabled');

@@ -1,12 +1,11 @@
 import { Component } from './base/Component';
-import {Category, CategoryTitle} from '../types';
+import { Category, CategoryTitle } from '../types';
 import { ensureElement, formatPrice } from '../utils/utils';
 import { CDN_URL } from '../utils/constants';
 
-
 // Интерфейс для оболочки карточки
 export interface ICard {
-  id: string,
+  id: string;
   title: string;
   description: string;
   price: number | null;
@@ -39,7 +38,10 @@ export class Card extends Component<ICard> {
     this._title = ensureElement<HTMLElement>(`.${blockName}__title`, container);
     this._price = container.querySelector(`.${blockName}__price`);
     this._category = container.querySelector(`.${blockName}__category`);
-    this._image = ensureElement<HTMLImageElement>(`.${blockName}__image`, container);
+    this._image = ensureElement<HTMLImageElement>(
+      `.${blockName}__image`,
+      container
+    );
     this._button = container.querySelector(`.${blockName}__button`);
 
     if (actions?.onClick) {
@@ -50,32 +52,32 @@ export class Card extends Component<ICard> {
       }
     }
   }
-// set и get для id
+  // set и get для id
   set id(value: string) {
     this.container.dataset.id = value;
   }
   get id(): string {
     return this.container.dataset.id || '';
-}
+  }
 
   // set и get для названия
-    set title(value: string) {
-        this.setText(this._title, value);
-    }
+  set title(value: string) {
+    this.setText(this._title, value);
+  }
 
-    get title(): string {
-        return this._title.textContent || '';
-    }
+  get title(): string {
+    return this._title.textContent || '';
+  }
 
   // set для изображения
 
   set image(value: string) {
     this.setImageWithCDN(this._image, value);
-}
+  }
 
   private setImageWithCDN(element: HTMLImageElement, imagePath: string) {
     element.src = CDN_URL + imagePath;
-}
+  }
 
   // set для определения выбрали товар или нет
   set selected(value: boolean) {
@@ -85,25 +87,23 @@ export class Card extends Component<ICard> {
   }
   set price(value: number | null) {
     if (value !== null) {
-        this._price.textContent = formatPrice(value) + ' синапсов';
-        if (this._button) {
-            this._button.disabled = false;
-        }
+      this._price.textContent = formatPrice(value) + ' синапсов';
+      if (this._button) {
+        this._button.disabled = false;
+      }
     } else {
-        this._price.textContent = 'Бесценно';
-        if (this._button) {
-            this._button.disabled = true;
-        }
+      this._price.textContent = 'Бесценно';
+      if (this._button) {
+        this._button.disabled = true;
+      }
     }
-}
+  }
 
   // Сеттер для категории
   set category(value: CategoryTitle) {
     this._category.textContent = value;
   }
-
 }
-
 
 export class StoreItem extends Card {
   constructor(container: HTMLElement, actions?: ICardActions) {
@@ -128,7 +128,32 @@ export class StoreItemPreview extends Card {
 
 
 
- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

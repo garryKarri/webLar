@@ -35,17 +35,13 @@ export class Page extends Component<IPage> {
     this.setText(this._counter, String(value));
   }
 
-  // set shoplist(items: HTMLElement[]) {
-  //   this._shoplist.replaceChildren(...items);
-  // }
   set store(items: HTMLElement[]) {
     if (this._store) {
       this._store.replaceChildren(...items);
     } else {
-      console.error("Ошибка: Элемент .gallery не найден в DOM.");
+      console.error('Ошибка: Элемент .gallery не найден в DOM.');
     }
   }
-  
 
   set locked(value: boolean) {
     if (value) {
