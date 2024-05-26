@@ -89,7 +89,7 @@ export interface IAppState {
 export type ApiAnswer = {
   items: IPill[];
 };
-export type ApiPostAnswer = {
-  // @ добавил
-  order: IOrder;
+export type ApiPostResponse = {
+  id: string;
+  total: number;
 };

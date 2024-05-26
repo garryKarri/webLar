@@ -1,42 +1,32 @@
 import { Api, ApiListResponse } from './base/api';
-import { IPill } from "../types";
-import { ICard } from "../components/Card"
-// export interface IWebLarekAPI {
-//     getCardList: () => Promise<ICard[]>;
-//     getCardItem: (id: string) => Promise<ICard>;
-// }
 
-// export class WebLarekAPI extends Api implements IWebLarekAPI {
-//     readonly cdn: string;
+import { ICard } from '../components/Card';
+import { ApiPostResponse } from '../types';
+import { IOrder } from './Order';
 
-//     constructor(cdn: string, baseUrl: string, options?: RequestInit) {
-//         super(baseUrl, options);
-//         this.cdn = cdn;
-//     }
+export interface IWebLarekAPI {
+  getCardList: () => Promise<ICard[]>;
+  // getCard: (id: string) => Promise<ICard[]>;
+  createOrder: (order: IOrder) => Promise<ApiPostResponse>;
+}
 
-    // getCardList(): Promise<ICard[]> {
-    //     return this.get(`/pill`).then((items: IPill[]) => {
-    //         return items.map(item => ({
-    //             ...item,
-    //             imgUrl: this.cdn + item.imgUrl,
-    //         }));
-    //     });
-    // }
-    
+export class WebLarekAPI extends Api implements IWebLarekAPI {
+  constructor(baseUrl: string, options?: RequestInit) {
+    super(baseUrl, options);
+  }
 
-    // getLotList(): Promise<ILot[]> {
-    //     return this.get('/lot').then((data: ApiListResponse<ILot>) =>
-    //         data.items.map((item) => ({
-    //             ...item,
-    //             image: this.cdn + item.image
-    //         }))
-    //     );
-    // }
-//     getCardItem(id: string): Promise<ICard> {
-//         return this.get(`/pill/${id}`).then((item: IPill) => ({
-//             ...item,
-//             imgUrl: this.cdn + item.imgUrl,
-//         }));
-//     }
-    
-// }
+  getCardList(): Promise<ICard[]> {
+    return this.get('/product').then(
+      (data: ApiListResponse<ICard>) => data.items
+    );
+  }
+
+  // getCard(id: string): Promise<ICard> {
+  // 	return this.get(`/product/${id}`).then((item: ICard) => ({
+  // 	}));
+  // }
+
+  createOrder(order: IOrder): Promise<ApiPostResponse> {
+    return this.post('/order', order).then((data: ApiPostResponse) => data);
+  }
+}
