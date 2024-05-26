@@ -141,10 +141,6 @@ events.on('basket:delete', (item: IPill) => {
 });
 
 events.on('basket:order', () => {
-  console.log(
-    'appData in modalOrder открытие модалки для оформления заказа',
-    appData
-  );
   modal.render({
     content: order.render({
       address: appData.order.address || '',
@@ -173,8 +169,6 @@ events.on('order.phone:change', (data: { field: string; value: string }) => {
 });
 
 events.on('order:submit', (order: IOrder) => {
-  console.log('appData в окне введения адреса', appData);
-
   appData.order.total = appData.getTotalCartPrice();
   appData.order.payment = order.payment;
   appData.order.address = order.address;
@@ -214,8 +208,6 @@ events.on('order:success', (orderData: IOrder) => {
   appData.clearOder(); // очистка заказа
   order.clearInputs();
   contacts.clearInputs();
-
-  console.log('appData in Success', appData);
 });
 
 //  Закрытие модального окна

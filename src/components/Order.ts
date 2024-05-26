@@ -149,8 +149,6 @@ export class Contacts extends Form<IContacts> {
     this.checkButton();
   }
   checkButton() {
-    console.log('checkButton', this.order);
-
     const isFormContactValid = !!this.order.email && !!this.order.phone;
     if (isFormContactValid) {
       this._submit.removeAttribute('disabled');
